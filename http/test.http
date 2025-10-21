@@ -1,0 +1,27 @@
+### OpenAI Chat
+POST http://localhost:8080/api/agent/chat
+content-type: application/json; charset="utf-8"
+
+{
+    "service" : "openai",
+    "message": "너의 이름은 뭐고 나를 위해 뭘 할 수 있어?"
+}
+
+### Gemini Chat
+POST http://localhost:8080/api/agent/chat
+content-type: application/json; charset="utf-8"
+
+{
+  "service" : "gemini",
+  "message": "너의 이름은 뭐고 나를 위해 뭘 할 수 있어?"
+}
+
+### Claude Chat
+POST http://localhost:8080/api/agent/chat
+content-type: application/json; charset="utf-8"
+
+{
+  "service" : "claude",
+  "message": "너의 이름은 뭐고 나를 위해 뭘 할 수 있어?"
+}
+

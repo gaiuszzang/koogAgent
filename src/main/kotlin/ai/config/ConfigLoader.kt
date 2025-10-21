@@ -22,9 +22,15 @@ data class McpConfig(
 }
 
 @Serializable
+data class AgentConfig(
+    val systemPrompt: String? = null
+)
+
+@Serializable
 data class Config(
     val apiKey: ApiKeyConfig?,
-    val mcp: List<McpConfig>?
+    val mcp: List<McpConfig>?,
+    val agent: AgentConfig? = null
 )
 
 object ConfigLoader {
@@ -58,5 +64,13 @@ object ConfigLoader {
 
     fun getMcpConfigList(): List<McpConfig>? {
         return config.mcp
+    }
+
+    fun getAgentConfig(): AgentConfig {
+        return config.agent ?: AgentConfig()
+    }
+
+    fun getSystemPrompt(): String {
+        return config.agent?.systemPrompt ?: "You are a chatbot."
     }
 }

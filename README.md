@@ -63,7 +63,9 @@ This project demonstrates how to build AI agents using the Koog framework, a Kot
 
 2. Run the application:
    ```bash
-   ./gradlew run
+   ./gradlew run --args="--mode=cli"
+   # or
+   ./gradlew run --args="--mode=server"
    ```
 
 #### Option 2: Install and Run Standalone
@@ -75,10 +77,18 @@ This project demonstrates how to build AI agents using the Koog framework, a Kot
 
 2. Run the installed application:
    ```bash
-   ./build/install/koogAgent/bin/koogAgent
+   ./build/install/koogAgent/bin/koogAgent --mode=cli
+   # or
+   ./build/install/koogAgent/bin/koogAgent --mode=server
    ```
 
-3. Select your preferred AI service (OpenAI, Gemini, or Claude) and start chatting!
+### Execution Modes
+
+The application supports two execution modes:
+
+- **CLI Mode** (`--mode=cli`): Interactive command-line interface for chatting with AI agents. Select your preferred AI service (OpenAI, Gemini, or Claude) and start chatting directly in the terminal.
+
+- **Server Mode** (`--mode=server`): Runs as an HTTP server exposing REST API endpoints for agent interactions. The server listens on port 8080 by default and provides programmatic access to AI agents.
 
 ## License
 

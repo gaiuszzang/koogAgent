@@ -1,16 +1,19 @@
 {
-    "apiKey": {
-        "openai": "your-openai-api-key-here",
-        "gemini": "your-gemini-api-key-here",
-        "claude": "your-claude-api-key-here"
-    },
-    "mcp": [
-        {
-            "url": "https://example.mcp.server/mcp",
-            "type": "streamableHttp",
-            "headers": {
-                "Authorization": "Bearer your-token-here"
-            }
-        }
-    ]
+  "agent": {
+    "systemPrompt": "your-system-prompt-here"
+  },
+  "apiKey": {
+      "openai": "your-openai-api-key-here",
+      "gemini": "your-gemini-api-key-here",
+      "claude": "your-claude-api-key-here"
+  },
+  "mcp": [
+      {
+          "url": "https://example.mcp.server/mcp",
+          "type": "streamableHttp",
+          "headers": {
+              "Authorization": "Bearer your-token-here"
+          }
+      }
+  ]
 }
