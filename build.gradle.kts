@@ -30,6 +30,10 @@ dependencies {
     implementation(libs.kotlinx.coroutines.reactor)
     implementation(libs.kotlinx.serialization.json)
 
+    // Ktor dependencies
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.content.negotiation)
+
     // Koog, mcp dependencies
     implementation(libs.koog.agents)
     implementation(libs.mcp.sdk)

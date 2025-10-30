@@ -11,6 +11,7 @@ import ai.koog.prompt.executor.model.PromptExecutor
 import ai.koog.prompt.llm.LLModel
 import ai.koog.prompt.message.Message
 import ai.koog.prompt.message.RequestMetaInfo
+import ai.koog.prompt.params.LLMParams
 import kotlinx.datetime.Clock
 
 object AgentProvider {
@@ -26,7 +27,8 @@ object AgentProvider {
                 content = systemPrompt,
                 metaInfo = RequestMetaInfo.create(Clock.System)
             ),
-            id = "chat"
+            id = "chat",
+            params = LLMParams(maxTokens = model.maxOutputTokens?.toInt())
         )
 
         val agentConfig = AIAgentConfig(
@@ -51,8 +53,10 @@ object AgentProvider {
                 }
                 onToolCallCompleted { ctx ->
                     println("Tool call completed: ${ctx.tool.name}")
-                    (ctx.result as McpTool.Result?)?.let {
-                        println("Tool call response: ${it.textForLLM()}")
+                    when (val result = ctx.result) {
+                        is McpTool.Result -> println("Tool call response: ${result.textForLLM()}")
+                        is String -> println("Tool call response: $result")
+                        else -> println("Tool call response: $result")
                     }
                 }
             }

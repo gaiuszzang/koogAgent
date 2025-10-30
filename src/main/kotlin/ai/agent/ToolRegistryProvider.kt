@@ -13,12 +13,13 @@ import io.modelcontextprotocol.kotlin.sdk.client.StreamableHttpClientTransport
 import kotlin.collections.iterator
 
 object ToolRegistryProvider {
-    suspend fun provide(mcpConfigList: List<McpConfig>?): ToolRegistry {
+    suspend fun provide(mcpConfigList: List<McpConfig>?, others: ToolRegistry? = null): ToolRegistry {
         if (mcpConfigList.isNullOrEmpty()) return ToolRegistry.EMPTY
         val toolRegistries = mutableListOf<ToolRegistry>()
         mcpConfigList.forEach { mcpConfig ->
             toolRegistries.add(provideMcpToolRegistry(mcpConfig))
         }
+        others?.let { toolRegistries.add(it) }
         return toolRegistries.fold(toolRegistries.first()) { acc, registry -> acc + registry }
     }
 

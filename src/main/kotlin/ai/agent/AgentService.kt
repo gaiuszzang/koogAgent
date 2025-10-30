@@ -2,6 +2,7 @@ package ai.agent
 
 import ai.config.ConfigLoader
 import ai.koog.agents.core.tools.ToolRegistry
+import ai.koog.agents.core.tools.reflect.asTool
 import ai.koog.prompt.executor.clients.anthropic.AnthropicModels
 import ai.koog.prompt.executor.clients.google.GoogleModels
 import ai.koog.prompt.executor.clients.openai.OpenAIModels
@@ -13,6 +14,7 @@ import ai.koog.prompt.llm.LLModel
 import ai.koog.prompt.message.Message
 import ai.koog.prompt.message.RequestMetaInfo
 import ai.koog.prompt.message.ResponseMetaInfo
+import ai.rag.searchDocuments
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
 
@@ -42,7 +44,12 @@ class AgentService(
                 AIService.CLAUDE -> AnthropicModels.Sonnet_4_5
             }
             chatHistory = SimpleChatHistory()
-            toolRegistry = ToolRegistryProvider.provide(ConfigLoader.getMcpConfigList())
+            toolRegistry = ToolRegistryProvider.provide(
+                mcpConfigList = ConfigLoader.getMcpConfigList(),
+                others = ToolRegistry {
+                    tool(::searchDocuments.asTool())
+                }
+            )
         }
     }
 
@@ -50,14 +57,13 @@ class AgentService(
         // Add user input to the chat history
         chatHistory.add(Message.User(content = userInput, metaInfo = RequestMetaInfo.create(Clock.System)))
 
-        // Get agent response with configured system prompt
+        // Get agent response with a configured system prompt
         val systemPrompt = ConfigLoader.getSystemPrompt()
         val agent = AgentProvider.provide(toolRegistry, executor, chatHistory, model, systemPrompt)
         val response = agent.run(userInput)
 
         // Add agent response to the chat history
         chatHistory.add(Message.Assistant(content = response, metaInfo = ResponseMetaInfo.create(Clock.System)))
-
         return response
     }
 

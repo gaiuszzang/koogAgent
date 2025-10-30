@@ -3,8 +3,11 @@ package ai.cli
 import ai.agent.AIService
 import ai.agent.AgentService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlin.system.exitProcess
 
 class CliApplication {
     fun start() = runBlocking {
@@ -50,10 +53,15 @@ class CliApplication {
 
             // Get agent response
             println("\nAgent: ")
-            val response = agentService.chat(userInput)
-            println(response)
+            try {
+                val response = agentService.chat(userInput)
+                println(response)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
             println("-".repeat(50))
         }
+        exitProcess(0)
     }
 }
 

@@ -10,7 +10,7 @@ interface ChatHistory {
 
 
 data class SimpleChatHistory(
-    private val maxHistorySize: Int = 12
+    private val maxHistorySize: Int = 10
 ) : ChatHistory {
     private val chatHistoryList = mutableListOf<Message>()
     override fun add(message: Message) {

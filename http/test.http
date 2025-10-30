@@ -25,3 +25,29 @@ content-type: application/json; charset="utf-8"
   "message": "너의 이름은 뭐고 나를 위해 뭘 할 수 있어?"
 }
 
+### OpenAI Chat with request MCP tool call 1
+POST http://localhost:8080/api/agent/chat
+content-type: application/json; charset="utf-8"
+
+{
+  "service" : "openai",
+  "message": "내 리마인더 목록 보여줘"
+}
+
+### OpenAI Chat with request MCP tool call 2
+POST http://localhost:8080/api/agent/chat
+content-type: application/json; charset="utf-8"
+
+{
+  "service" : "openai",
+  "message": "내 보유 주식 목록 보여줘"
+}
+
+### OpenAI Chat with request RAG
+POST http://localhost:8080/api/agent/chat
+content-type: application/json; charset="utf-8"
+
+{
+  "service" : "openai",
+  "message": "QuantumLeap AI는 클라우드, 온프레미스 둘 중 어떤 형태로 사용 가능해?"
+}
