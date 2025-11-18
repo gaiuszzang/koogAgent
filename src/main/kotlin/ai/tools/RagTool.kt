@@ -1,7 +1,8 @@
-package ai.rag
+package ai.tools
 
 import ai.koog.agents.core.tools.annotations.LLMDescription
 import ai.koog.agents.core.tools.annotations.Tool
+import ai.rag.RagService
 import kotlinx.coroutines.flow.toList
 
 @Tool
