@@ -90,6 +90,29 @@ The application supports two execution modes:
 
 - **Server Mode** (`--mode=server`): Runs as an HTTP server exposing REST API endpoints for agent interactions. The server listens on port 8080 by default and provides programmatic access to AI agents.
 
+
+### Create Docker Image for SpringBoot API Server
+
+#### 1. Build a shadowJar
+```bash
+./gradlew bootJar
+```
+
+#### 2. Create Docker Image for multi-arch
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t koog-agent:latest .
+```
+
+#### 3. Load Docker Image for current Device
+```bash
+docker buildx build --platform linux/arm64 --load -t koog-agent:latest .
+```
+
+#### 4. Run Docker Conatiner
+```bash
+docker run -d -p 3000:8080 --name koogagent-server koog-agent
+```
+
 ## License
 
 MIT License

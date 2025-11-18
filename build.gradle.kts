@@ -41,7 +41,6 @@ dependencies {
     //implementation(libs.koog.spring.boot.starter) //https://github.com/JetBrains/koog/blob/develop/koog-spring-boot-starter/Module.md
 
     // Spring Boot dependencies
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

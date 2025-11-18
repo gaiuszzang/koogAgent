@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: koog-agent
+  main:
+    web-application-type: reactive
+
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG
+    org.springframework.boot: DEBUG
+    ai: DEBUG
+
+server:
+  port: 8080
